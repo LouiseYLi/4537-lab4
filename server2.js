@@ -1,4 +1,7 @@
 class Server2 {
+    http = require('http');
+    url = require('url');
+    fs = require('fs');
     msg = require('./lang/messages/en/user.js')
     class_dictionary = require('./js/dictionary.js')
     constructor(port) {
