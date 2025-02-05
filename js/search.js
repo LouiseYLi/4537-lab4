@@ -1,17 +1,28 @@
-function init_page() {
-    const title = document.querySelector("#title_search");
-    const page_title = document.querySelector("#page_title h1");
-    const word_label = document.querySelector('label[for="word"]');
-    const definition_label = document.querySelector('label[for="definition"]');
-    const submit_btn = document.querySelector('input[type="submit"]');
+class SearchPage {
+    constructor() {
+        this.init_page();
+    }
+    init_page() {
+        const title = document.querySelector("#title_search");
+        const page_title = document.querySelector("#page_title h1");
+        const word_label = document.querySelector('#word_label');
+        const definition_label = document.querySelector('#definition_label');
+        const submit_btn = document.querySelector('input[type="submit"]');
+    
+        title.textContent = TITLE_SEARCHPAGE;
+        page_title.textContent = TITLE_SEARCHPAGE;
+        word_label.textContent = WORD_LABEL;
+        definition_label.textContent = DEFINITION_LABEL;
+        submit_btn.value = SEARCH_LABEL;
 
-    document.querySelector("#search_definition").value = "AHAHAHAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
+        submit_btn.addEventListener('click', this.search_word.bind(this));
+    }
 
-    title.textContent = TITLE_SEARCHPAGE;
-    page_title.textContent = TITLE_SEARCHPAGE;
-    word_label.textContent = WORD_LABEL;
-    definition_label.textContent = DEFINITION_LABEL;
-    submit_btn.value = SEARCH_LABEL;
+    search_word() {
+        console.log("search word");
+    }
 }
 
-init_page();
+const page = new SearchPage();
+
+
