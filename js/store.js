@@ -1,7 +1,6 @@
 class StorePage {
     constructor() {
         this.init_page();
-
     }
     
     init_page() {
@@ -22,6 +21,9 @@ class StorePage {
 
     add_word() {
         console.log("add word");
+        const word = document.querySelector("#word");
+        const definition = document.querySelector("#store_definition");
+
     }
     
 }
