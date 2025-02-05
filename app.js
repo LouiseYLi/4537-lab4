@@ -10,11 +10,11 @@ class Server2 {
     }
 
     handleRequest(request, response) {
-        // const q = this.url.parse(request.url, true);
-        // const q_pathname = q.pathname;
+        const q = this.url.parse(request.url, true);
+        const q_pathname = q.pathname;
   
-        // let split_path = q_pathname.substring(1).split("/");
-        // let rw = split_path.shift();
+        let split_path = q_pathname.substring(1).split("/");
+        let  = split_path.shift();
         // if (rw === "getDate") {
         //   this.handleGetDate(q, response);
         // } else if (rw === "readFile") {
