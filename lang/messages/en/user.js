@@ -5,3 +5,6 @@ const DEFINITION_LABEL = "Definition:";
 const ADD_LABEL = "Add";
 
 const TITLE_SEARCHPAGE = "SEARCH DICTIONARY";
+
+
+const SEARCH_LABEL = "Search";
