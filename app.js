@@ -14,7 +14,10 @@ class Server2 {
         const q_pathname = q.pathname;
   
         let split_path = q_pathname.substring(1).split("/");
-        let  = split_path.shift();
+        let path = split_path.shift();
+        // if (path === "") {
+
+        // }
         // if (rw === "getDate") {
         //   this.handleGetDate(q, response);
         // } else if (rw === "readFile") {
