@@ -42,10 +42,22 @@ class StorePage {
         xhr.onreadystatechange = () => {
             // if request was fully sent or error occurred
             if (xhr.readyState == 4) {
-                this.display_send_status(xhr.responseText);
+                if (xhr.status === 200) { 
+                    const response = JSON.parse(xhr.responseText); 
+                    if (response.entry) {
+                        this.display_send_status(`Request ${response.requests}: ${SUCCESS_ADD}... "${response.word}: ${response.definition}"`);
+                    } else {
+                        this.display_err("#error_message_word", `Request ${response.requests} ${ERR_WORD_EXISTS}`);
+                    }
+                } else if (xhr.status >= 500) { 
+                    this.display_send_status(`Server Error`); 
+                } else if (xhr.status >= 400) { 
+                    this.display_send_status(`Client Error`); 
+                } else if (xhr.status >= 300) { 
+                    this.display_send_status(`Redirection`); 
+                } 
                 return;
             }
-            this.display_send_status(ERR_INCOMPLETE_REQ);
         };
     }
 

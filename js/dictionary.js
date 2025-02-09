@@ -3,7 +3,11 @@ class Dictionary {
         this.dictionary = new Map();
     }
     add_entry(word, definition) {
-        this.dictionary.set(word, definition);
+        if (!this.dictionary.has(word)) {
+            this.dictionary.set(word, definition);
+            return word;
+        }
+        else return null;
     }
     get_definition(word) {
         if (!this.dictionary.has(word)) return null;

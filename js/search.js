@@ -33,12 +33,21 @@ class SearchPage {
         xhr.onreadystatechange = () => {
             // if request was fully sent or error occurred
             if (xhr.readyState == 4) {
-                if (xhr.responseText === ERR_WORD_NOT_FOUND) {
-                    this.display_err("#error_message_word", xhr.responseText);
-                } else {
-                    this.display_search_result(xhr.responseText);
-                }
-                return;
+                if (xhr.status === 200) { 
+                    const response = JSON.parse(xhr.responseText); 
+                    if (response.definition) {
+                        this.display_search_result(response.definition); 
+                        this.display_send_status(`Request ${response.requests} ${SUCCESS_SEARCH}`);
+                    } else {
+                        this.display_err("#error_message_word", `Request ${response.requests} ${ERR_WORD_NOT_FOUND}`);
+                    }
+                } else if (xhr.status >= 500) { 
+                    this.display_send_status(`Server Error`); 
+                } else if (xhr.status >= 400) { 
+                    this.display_send_status(`Client Error`); 
+                } else if (xhr.status >= 300) { 
+                    this.display_send_status(`Redirection`); 
+                } 
             }
         };
     }
