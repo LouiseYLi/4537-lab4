@@ -8,7 +8,7 @@ const ERR_INVALID_DEFINITION = "Error: Invalid definition entered. Must be lette
 const SUCCESS_ADD = "New entry recorded.";
 const SUCCESS_SEARCH = "Word found.";
 const ERR_INCOMPLETE_REQ = "Error: Incomplete request.";
-const ERR_WORD_NOT_FOUND = "Error: Word not found.";
+const ERR_WORD_NOT_FOUND = " not found.";
 const ERR_WORD_EXISTS = "Error: Word exists already.";
 const TITLE_SEARCHPAGE = "SEARCH DICTIONARY";
 

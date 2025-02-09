@@ -39,7 +39,7 @@ class SearchPage {
                         this.display_search_result(response.definition); 
                         this.display_send_status(`Request ${response.requests} ${SUCCESS_SEARCH}`);
                     } else {
-                        this.display_err("#error_message_word", `Request ${response.requests} ${ERR_WORD_NOT_FOUND}`);
+                        this.display_err("#error_message_word", `Request ${response.requests} "${response.word}" ${ERR_WORD_NOT_FOUND}`);
                     }
                 } else if (xhr.status >= 500) { 
                     this.display_send_status(`Server Error`); 

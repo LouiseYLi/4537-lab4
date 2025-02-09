@@ -24,6 +24,7 @@ class Server {
         
         const obj = {
           requests: this.requests,
+          word: q.query.word,
           definition: definition
         }
         response.end(JSON.stringify(obj));
