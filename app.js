@@ -17,24 +17,27 @@ class Server {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "*"
       });
-      if (request.method === "GET") {
-          console.log("get");
+      if (request.method == "GET") {
+        const q = this.url.parse(request.url, true);
+        const definition = this.dictionary.get_definition(q.query.word);
+        if (definition != null) {
+          response.end(definition);
+        } else {
+          response.end("Error: Word not found.");
+        }
       } else if (request.method == "POST" && request.url == this.endpoint_route) {
-        console.log("post");
         let body = "";
         request.on('data', (chunk) => { 
           if (chunk != null ) body += chunk;
         });
 
         request.on('end', () => { 
-          console.log(body);
           let q = this.url.parse(body, true);
           this.dictionary.add_entry(q.query.word, q.query.definition);
-          console.log(this.dictionary);
           response.end('Successfully added to dictionary.');
         });
       }
-  }
+    }
     start() {
       this.server.listen(this.port, () => {
         console.log(`listening...`);

@@ -20,7 +20,6 @@ class StorePage {
     }
 
     add_word() {
-        console.log("add_word");
         this.reset_page();
         const word = document.querySelector("#word").value;
         const definition = document.querySelector("#store_definition").value;

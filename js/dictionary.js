@@ -6,6 +6,7 @@ class Dictionary {
         this.dictionary.set(word, definition);
     }
     get_definition(word) {
+        if (!this.dictionary.has(word)) return null;
         return this.dictionary.get(word);
     }
 }
