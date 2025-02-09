@@ -10,8 +10,8 @@ class Dictionary {
         else return null;
     }
     get_definition(word) {
-        if (!this.dictionary.has(word)) return null;
-        return this.dictionary.get(word);
+        if (!this.dictionary.has(word.toLowerCase())) return null;
+        return this.dictionary.get(word.toLowerCase());
     }
 }
 module.exports = Dictionary;
