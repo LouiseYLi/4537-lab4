@@ -5,7 +5,7 @@ class Dictionary {
     add_entry(word, definition) {
         console.log(word.toLowerCase());
         if (!this.dictionary.has(word.toLowerCase())) {
-            this.dictionary.set(word, definition);
+            this.dictionary.set(word.toLowerCase(), definition);
             return word;
         }
         else return null;
