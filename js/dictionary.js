@@ -3,7 +3,7 @@ class Dictionary {
         this.dictionary = new Map();
     }
     add_entry(word, definition) {
-        if (!this.dictionary.has(word)) {
+        if (!this.dictionary.has(word.toLowerCase())) {
             this.dictionary.set(word, definition);
             return word;
         }
