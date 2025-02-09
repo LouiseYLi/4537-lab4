@@ -20,10 +20,62 @@ class StorePage {
     }
 
     add_word() {
-        console.log("add word");
-        const word = document.querySelector("#word");
-        const definition = document.querySelector("#store_definition");
+        console.log("add_word");
+        this.reset_page();
+        const word = document.querySelector("#word").value;
+        const definition = document.querySelector("#store_definition").value;
+        
+        if (!this.validate_string(word) || !this.validate_string(definition) || word.includes(" ")) {
+            if (!this.validate_string(word) || word.includes(" ")) {
+                this.display_err("#error_message_word", ERR_INVALID_WORD);
+            }
 
+            if (!this.validate_string(definition)) {
+                this.display_err("#error_message_definition", ERR_INVALID_DEFINITION);
+            }
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/api/dictionary");
+        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+        xhr.send(`?word=${word}&definition=${definition}`);
+        xhr.onreadystatechange = () => {
+            // if request was fully sent or error occurred
+            if (xhr.readyState == 4) {
+                this.display_send_status(xhr.responseText);
+                return;
+            }
+            this.display_send_status(ERR_INCOMPLETE_REQ);
+        };
+    }
+
+    reset_page() {
+        event.preventDefault();
+        document.querySelector("#submit_status").textContent = "";
+        document.querySelector("#error_message_word").textContent = "";
+        document.querySelector("#error_message_definition").textContent = "";
+    }
+
+    validate_string(str) {
+        if (str.length == 0) {
+            return false;
+        }
+
+        for (let i = 0; i < str.length; i++) {
+            if(!((/[a-zA-z' ']/).test(str[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    display_err(id, msg) {
+        document.querySelector(id).textContent = msg;
+    }
+
+    display_send_status(msg) {
+        document.querySelector("#submit_status").textContent = msg;
     }
     
 }

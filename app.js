@@ -1,41 +1,46 @@
-class Server2 {
+class Server {
     http = require('http');
     url = require('url');
     fs = require('fs');
-    msg = require('./lang/messages/en/user.js')
-    class_dictionary = require('./js/dictionary.js')
+    msg = require('./lang/messages/en/user.js');
+    // utils = require('./modules/utils.js');
+    endpoint_route = "/api/dictionary";
+    Dictionary = require('./js/dictionary.js');
     constructor(port) {
-        this.port = port;
-        this.server = this.http.createServer(this.handleRequest.bind(this));
+      this.port = port;
+      this.server = this.http.createServer(this.handleRequest.bind(this));
+      this.dictionary = new this.Dictionary();
     }
-
     handleRequest(request, response) {
-        const q = this.url.parse(request.url, true);
-        const q_pathname = q.pathname;
-  
-        let split_path = q_pathname.substring(1).split("/");
-        let path = split_path.shift();
-        // if (path === "") {
+      response.writeHead(200, {
+          "content-type": "text/html",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*"
+      });
+      if (request.method === "GET") {
+          console.log("get");
+      } else if (request.method == "POST" && request.url == this.endpoint_route) {
+        console.log("post");
+        let body = "";
+        request.on('data', (chunk) => { 
+          if (chunk != null ) body += chunk;
+        });
 
-        // }
-        // if (rw === "getDate") {
-        //   this.handleGetDate(q, response);
-        // } else if (rw === "readFile") {
-        //   this.handleRead(q, response);
-        // } else if (rw === "writeFile") {
-        //   this.handleWrite(q, response);
-        // } else {
-        //   response.writeHead(404, { 'Content-Type': 'text/plain' });
-        //   response.end(`${this.msg.RES_404}`);
-        // }
-      }
-
-      start() {
-        this.server.listen(this.port, () => {
-          console.log(`listening...`);
+        request.on('end', () => { 
+          console.log(body);
+          let q = this.url.parse(body, true);
+          this.dictionary.add_entry(q.query.word, q.query.definition);
+          console.log(this.dictionary);
+          response.end('Successfully added to dictionary.');
         });
       }
+  }
+    start() {
+      this.server.listen(this.port, () => {
+        console.log(`listening...`);
+      });
+    }
 }
 
-const server = new Server2(8080);
+const server = new Server(8080);
 server.start();
