@@ -2,7 +2,6 @@ class Server {
     http = require('http');
     url = require('url');
     fs = require('fs');
-    msg = require('./lang/messages/en/server.js');
     endpoint_route = "/api/dictionary";
     Dictionary = require('./js/dictionary.js');
     constructor(port) {
@@ -46,11 +45,6 @@ class Server {
             definition: q.query.definition
           }
           response.end(JSON.stringify(obj));
-          // if (entry == null) {
-          //   response.end(this.msg.WARNING_EXISTING_ENTRY);
-          //   return;
-          // }
-          // response.end(this.msg.SUCCESS_SUBMIT);
         });
       }
 
