@@ -37,7 +37,7 @@ class SearchPage {
                     const response = JSON.parse(xhr.responseText); 
                     if (response.definition) {
                         this.display_search_result(response.definition); 
-                        this.display_send_status(`Request ${response.requests} ${SUCCESS_SEARCH}`);
+                        this.display_send_status(`Request ${response.requests} "${response.word}" ${SUCCESS_SEARCH}`);
                     } else {
                         this.display_err("#error_message_word", `Request ${response.requests} "${response.word}" ${ERR_WORD_NOT_FOUND}`);
                     }
